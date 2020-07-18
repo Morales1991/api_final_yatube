@@ -11,15 +11,14 @@ class GroupSerializer(serializers.ModelSerializer):
 
 
 class PostSerializer(serializers.ModelSerializer):
-    author = serializers.ReadOnlyField(source='author.username')
-    
+    author = serializers.StringRelatedField()
     class Meta:
         fields = '__all__'
         model = Post
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    author = serializers.ReadOnlyField(source='author.username')
+    author = serializers.StringRelatedField()
 
     class Meta:
         fields = '__all__'
@@ -27,8 +26,8 @@ class CommentSerializer(serializers.ModelSerializer):
 
 
 class FollowSerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source='user.username')
-    following = serializers.ReadOnlyField(source='following.username')
+    user = serializers.StringRelatedField()
+    following = serializers.StringRelatedField()
     
     class Meta:
         fields = '__all__'

@@ -13,7 +13,7 @@ router.register(r'posts/(?P<post_id>\d+)/comments', CommentViewSet)
 urlpatterns = [
     path('token/', TokenObtainPairView.as_view(), name='Get_token'),
     path('token/refresh/', TokenRefreshView.as_view, name='Refresh_token'),
-    path('group/', GroupList.as_view(), name='Group' ),
-    path('follow/', FollowList.as_view(), name='Follow' ),
+    path('group/', GroupList.as_view(), name='Group'),
+    path('follow/', FollowList.as_view(), name='Follow'),
     path('',include(router.urls)),
 ]

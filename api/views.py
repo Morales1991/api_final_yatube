@@ -48,14 +48,16 @@ class FollowList(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         try:
             following = User.objects.get(
-                username=self.request.data.get('following'))
+                username=self.request.data.get('following')
+            )
         except User.DoesNotExist:
             raise ValidationError(serializer.errors, status.HTTP_404_NOT_FOUND)
+       
         if Follow.objects.filter(user=self.request.user, following=following).exists():
             raise ValidationError(serializer.errors, status.HTTP_400_BAD_REQUEST)
+        
         if self.request.user == following:
             raise ValidationError(serializer.errors, status.HTTP_400_BAD_REQUEST)
+        
         serializer.save(user=self.request.user, following=following)
         return Response(serializer.data, status.HTTP_201_CREATED)
-
- 
